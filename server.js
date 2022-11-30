@@ -2,7 +2,6 @@ const { render } = require('ejs');
 const express = require('express');
 const app = express();
 const path = require('path');
-const mongoose = require('mongoose');
 const connectDB = require('./config/database');
 const Ticket = require('./models/ticket');
 
@@ -19,19 +18,9 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/createTicket', async (req, res) => {
-  const ticket = new Ticket({
-    title: 'First Test',
-    description: 'this is a test',
-    project: 'bug tracker',
-    priority: 'low',
-  });
-  try {
-    await ticket.save();
-    res.send(ticket);
-  } catch (err) {
-    if (err) return res.status(500).send(err);
-  }
+app.get('/tickets', async (req, res) => {
+  const tickets = await Ticket.find({});
+  res.render('tickets/index', { tickets });
 });
 
 app.listen(process.env.PORT, () => {
