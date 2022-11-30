@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ticket: <%= ticket._id %></title>
-  </head>
-  <body>
-    <h1>Ticket: <%= ticket._id %></h1>
-    <form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
-      <button>Delete Ticket</button>
-    </form>
-    <div>
-      <a href="/tickets/<%= ticket._id %>/edit">Edit ticket</a>
-    </div>
-    <div>
-      <a href="/tickets">See All Tickets</a>
-    </div>
-  </body>
-</html>
+<% layout('layouts/boilerplate') %>
+
+<h1>Ticket: <%= ticket._id %></h1>
+<form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
+  <button>Delete Ticket</button>
+</form>
+<div>
+  <a href="/tickets/<%= ticket._id %>/edit">Edit ticket</a>
+</div>
+<div>
+  <a href="/tickets">See All Tickets</a>
+</div>

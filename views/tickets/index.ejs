@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tickets</title>
-  </head>
-  <body>
-    <h1>All Tickets</h1>
-    <div>
-      <a href="/tickets/new">Add New Ticket</a>
-    </div>
-    <ul>
-      <% for (let ticket of tickets) {%>
-      <li><a href="/tickets/<%= ticket._id %>"><%= ticket.title %></a></li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<% layout('layouts/boilerplate') %>
+
+<h1>All Tickets</h1>
+<div>
+  <a href="/tickets/new">Add New Ticket</a>
+</div>
+<ul>
+  <% for (let ticket of tickets) {%>
+  <li>
+    <a href="/tickets/<%= ticket._id %>"><%= ticket.title %></a>
+  </li>
+  <% } %>
+</ul>
