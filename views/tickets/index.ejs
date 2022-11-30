@@ -7,6 +7,9 @@
   </head>
   <body>
     <h1>All Tickets</h1>
+    <div>
+      <a href="/tickets/new">Add new ticket</a>
+    </div>
     <ul>
       <% for (let ticket of tickets) {%>
       <li><a href="/tickets/<%= ticket._id %>"><%= ticket.title %></a></li>

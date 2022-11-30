@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Ticket</title>
+  </head>
+  <body>
+    <form action="/tickets" method="POST">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="ticket[title]" />
+      </div>
+      <div>
+        <label for="project">Project</label>
+        <input type="text" id="project" name="ticket[project]" />
+      </div>
+      <button>Add New Ticket</button>
+    </form>
+    <a href="/tickets">Show All Tickets</a>
+  </body>
+</html>
