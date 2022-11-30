@@ -7,8 +7,14 @@
   </head>
   <body>
     <h1>Ticket: <%= ticket._id %></h1>
-
-    <a href="/tickets/<%= ticket._id %>/edit">Edit ticket</a>
-    <a href="/tickets">See All Tickets</a>
+    <form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
+      <button>Delete Ticket</button>
+    </form>
+    <div>
+      <a href="/tickets/<%= ticket._id %>/edit">Edit ticket</a>
+    </div>
+    <div>
+      <a href="/tickets">See All Tickets</a>
+    </div>
   </body>
 </html>

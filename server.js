@@ -60,6 +60,13 @@ app.put('/tickets/:id', async (req, res) => {
   res.redirect(`/tickets/${ticket._id}`);
 });
 
+// delete ticket
+app.delete('/tickets/:id', async (req, res) => {
+  const { id } = req.params;
+  await Ticket.findByIdAndRemove(id);
+  res.redirect(`/tickets`);
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`App running on port: ${process.env.PORT}`);
 });
