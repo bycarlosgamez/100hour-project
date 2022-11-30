@@ -1,7 +1,7 @@
-const { render } = require('ejs');
 const express = require('express');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
 const connectDB = require('./config/database');
 const Ticket = require('./models/ticket');
 
@@ -17,6 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public')); // to use public files
 app.use(express.urlencoded({ extended: true })); // to parse req.body
 app.use(express.json()); // to convert to json
+app.use(methodOverride('_method')); // to use put or delete methods from form
 
 // homepage
 app.get('/', (req, res) => {
@@ -42,8 +43,21 @@ app.post('/tickets', async (req, res) => {
 
 // see individual ticket by id
 app.get('/tickets/:id', async (req, res) => {
-  const ticket = await Ticket.findById(req.params.id);
+  const { id } = req.params;
+  const ticket = await Ticket.findById(id);
   res.render('tickets/show', { ticket });
+});
+
+// edit existing ticket
+app.get('/tickets/:id/edit', async (req, res) => {
+  const ticket = await Ticket.findById(req.params.id);
+  res.render('tickets/edit', { ticket });
+});
+
+app.put('/tickets/:id', async (req, res) => {
+  const { id } = req.params;
+  const ticket = await Ticket.findByIdAndUpdate(id, { ...req.body.ticket });
+  res.redirect(`/tickets/${ticket._id}`);
 });
 
 app.listen(process.env.PORT, () => {

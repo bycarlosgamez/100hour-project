@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Ticket</title>
+  </head>
+  <body>
+    <h1>Edit Ticket: <%= ticket._id %></h1>
+    <form action="/tickets/<%= ticket._id %>?_method=PUT" method="POST">
+      <div>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="ticket[title]"
+          value="<%= ticket.title %>"
+        />
+      </div>
+      <div>
+        <label for="project">Project</label>
+        <input
+          type="text"
+          id="project"
+          name="ticket[project]"
+          value="<%= ticket.project %>"
+        />
+      </div>
+      <button>Update Ticket</button>
+    </form>
+    <a href="/tickets/<%= ticket._id %>">Back To Ticket</a>
+  </body>
+</html>
