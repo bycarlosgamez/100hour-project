@@ -9,7 +9,7 @@
     <h1>All Tickets</h1>
     <ul>
       <% for (let ticket of tickets) {%>
-      <li><%= ticket.title %></li>
+      <li><a href="/tickets/<%= ticket._id %>"><%= ticket.title %></a></li>
       <% } %>
     </ul>
   </body>

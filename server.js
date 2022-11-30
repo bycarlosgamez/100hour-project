@@ -23,6 +23,11 @@ app.get('/tickets', async (req, res) => {
   res.render('tickets/index', { tickets });
 });
 
+app.get('/tickets/:id', async (req, res) => {
+  const ticket = await Ticket.findById(req.params.id);
+  res.render('tickets/show', { ticket });
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`App running on port: ${process.env.PORT}`);
 });
