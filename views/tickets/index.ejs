@@ -3,7 +3,7 @@
   <div class="sm:flex-auto">
     <h1 class="text-xl font-semibold text-gray-900">All Tickets</h1>
     <p class="mt-2 text-sm text-gray-700">
-      A list of all the tickets, including their name...
+      A list of all the tickets available:
     </p>
   </div>
   <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -29,7 +29,7 @@
                 scope="col"
                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
               >
-                Name
+                Project
               </th>
               <th
                 scope="col"
@@ -41,13 +41,13 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                ID
+                Owner
               </th>
               <th
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Role
+                Assigned
               </th>
               <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                 <span class="sr-only">Details</span>
@@ -58,19 +58,23 @@
             <!-- Create new tr per ticket -->
             <% for (let ticket of tickets) {%>
             <tr>
+              <!-- Project -->
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
               >
-                Name
+                <%= ticket.project %>
               </td>
+              <!-- Title -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <%= ticket.title %>
               </td>
+              <!-- Owner -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <%= ticket._id %>
+                <%= ticket.owner %>
               </td>
+              <!-- Assigned -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                Member
+                <%= ticket.assigned %>
               </td>
               <td
                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
