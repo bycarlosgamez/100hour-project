@@ -1,25 +1,211 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate') %> <% layout('layouts/boilerplate') %>
 
-<h1>Edit Ticket: <%= ticket._id %></h1>
-<form action="/tickets/<%= ticket._id %>?_method=PUT" method="POST">
-  <div>
-    <label for="title">Title</label>
-    <input
-      type="text"
-      id="title"
-      name="ticket[title]"
-      value="<%= ticket.title %>"
-    />
+<div class="mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="h-full flex flex-col justify-between">
+        <div class="px-4 sm:px-0">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            Edit Ticket
+          </h3>
+          <p class="mt-1 text-sm text-gray-600">Edit ticket information.</p>
+        </div>
+        <div>
+          <a
+            href="/tickets/<%= ticket._id %>"
+            class="inline-block rounded-lg bg-indigo-600 px-4 mt-8 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
+          >
+            <span class="text-indigo-200" aria-hidden="true">&larr;</span>
+            Back to Ticket
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <!-- FORM -->
+      <form action="/tickets/<%= ticket._id %>?_method=PUT" method="POST">
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="bg-white px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+              <!-- TITLE -->
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="title"
+                  class="block text-sm font-medium text-gray-700"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  name="ticket[title]"
+                  id="title"
+                  value="<%= ticket.title %>"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <!-- PROJECT -->
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="project"
+                  class="block text-sm font-medium text-gray-700"
+                  >Project</label
+                >
+                <input
+                  type="text"
+                  name="ticket[project]"
+                  id="project"
+                  value="<%= ticket.project %>"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <!-- DESCRIPTION -->
+              <div class="col-span-6 sm:col-span-6">
+                <label
+                  for="description"
+                  class="block text-sm font-medium text-gray-700"
+                  >Description</label
+                >
+                <div class="mt-1">
+                  <textarea
+                    id="description"
+                    name="ticket[description]"
+                    rows="3"
+                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  >
+<%= ticket.description %></textarea
+                  >
+                </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Brief description for your ticket
+                </p>
+              </div>
+
+              <!-- Priority-->
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="priority"
+                  class="block text-sm font-medium text-gray-700"
+                  >Priority</label
+                >
+                <select
+                  id="priority"
+                  name="ticket[priority]"
+                  value="<%= ticket.priority %>"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                >
+                  <option value="high">HIGH</option>
+                  <option value="med">MED</option>
+                  <option value="low">LOW</option>
+                </select>
+              </div>
+
+              <!-- Type-->
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="type"
+                  class="block text-sm font-medium text-gray-700"
+                  >type</label
+                >
+                <select
+                  id="type"
+                  name="ticket[type]"
+                  value="<%= ticket.type %>"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                >
+                  <option value="bug">Bug / Error</option>
+                  <option value="feat">Feature Request</option>
+                  <option value="doc">Document Request</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <!-- <div class="col-span-6 sm:col-span-4">
+                <label
+                  for="email-address"
+                  class="block text-sm font-medium text-gray-700"
+                  >Email address</label
+                >
+                <input
+                  type="text"
+                  name="email-address"
+                  id="email-address"
+                  autocomplete="email"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div class="col-span-6">
+                <label
+                  for="street-address"
+                  class="block text-sm font-medium text-gray-700"
+                  >Street address</label
+                >
+                <input
+                  type="text"
+                  name="street-address"
+                  id="street-address"
+                  autocomplete="street-address"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                <label
+                  for="city"
+                  class="block text-sm font-medium text-gray-700"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  autocomplete="address-level2"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  for="region"
+                  class="block text-sm font-medium text-gray-700"
+                  >State / Province</label
+                >
+                <input
+                  type="text"
+                  name="region"
+                  id="region"
+                  autocomplete="address-level1"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  for="postal-code"
+                  class="block text-sm font-medium text-gray-700"
+                  >ZIP / Postal code</label
+                >
+                <input
+                  type="text"
+                  name="postal-code"
+                  id="postal-code"
+                  autocomplete="postal-code"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div> -->
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <button
+              type="submit"
+              class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Update Ticket
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div>
-    <label for="project">Project</label>
-    <input
-      type="text"
-      id="project"
-      name="ticket[project]"
-      value="<%= ticket.project %>"
-    />
-  </div>
-  <button>Update Ticket</button>
-</form>
-<a href="/tickets/<%= ticket._id %>">Back To Ticket</a>
+</div>
