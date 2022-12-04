@@ -39,6 +39,7 @@ app.get('/tickets/new', (req, res) => {
 
 app.post('/tickets', async (req, res) => {
   const ticket = new Ticket(req.body.ticket);
+  console.log(ticket);
   await ticket.save();
   res.redirect(`/tickets/${ticket._id}`);
 });
