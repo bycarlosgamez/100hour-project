@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const TicketSchema = new Schema({
   title: String,
   description: String,
-  //   assigned: String,
-  //   owner: String,
-  project: String,
+  owner: String,
+  assigmned: String,
+  created: Date,
+  updated: Date,
+  type: String,
   priority: String,
-  //   status: String,
-  //   type: String,
-  //   date: Date,
-  //   updated: Date,
+  status: String,
+  project: String,
 });
 
 module.exports = mongoose.model('Ticket', TicketSchema, 'tickets');
