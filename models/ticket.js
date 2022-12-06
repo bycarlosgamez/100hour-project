@@ -5,7 +5,7 @@ const TicketSchema = new Schema({
   title: String,
   description: String,
   owner: String,
-  assigmned: String,
+  assigned: String,
   created: Date,
   updated: Date,
   type: String,
