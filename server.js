@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const ejsmate = require('ejs-mate');
 const catchAsync = require('./helpers/catchAsync');
+const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
 const connectDB = require('./config/database');
 const Ticket = require('./models/ticket');
@@ -89,8 +90,15 @@ app.delete(
   })
 );
 
-app.use((err, req, res, next), () => {
-  res.send('Something went wrong');
+// show 404
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page Not Found', 404));
+});
+
+// error catch
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message = 'Something Went Wrong' } = err;
+  res.status(statusCode).send(message);
 });
 
 app.listen(process.env.PORT, () => {
