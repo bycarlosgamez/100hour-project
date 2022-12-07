@@ -98,7 +98,7 @@ app.all('*', (req, res, next) => {
 // error catch
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = 'Something Went Wrong' } = err;
-  res.status(statusCode).send(message);
+  res.status(statusCode).render('error/404');
 });
 
 app.listen(process.env.PORT, () => {
