@@ -45,8 +45,8 @@ app.get('/tickets/new', (req, res) => {
 app.post(
   '/tickets',
   catchAsync(async (req, res) => {
+    if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
     const ticket = new Ticket(req.body.ticket);
-    console.log(ticket);
     await ticket.save();
     res.redirect(`/tickets/${ticket._id}`);
   })
@@ -97,8 +97,9 @@ app.all('*', (req, res, next) => {
 
 // error catch
 app.use((err, req, res, next) => {
-  const { statusCode = 500, message = 'Something Went Wrong' } = err;
-  res.status(statusCode).render('error/404');
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = 'Oh no, something went wrong';
+  res.status(statusCode).render('errors/error', { err });
 });
 
 app.listen(process.env.PORT, () => {
