@@ -122,7 +122,8 @@
     </dl>
   </div>
 
-  <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-end">
+  <!-- Ticket actions -->
+  <div class="bg-white px-4 py-3 mb-4 text-right sm:px-6 flex justify-end">
     <form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
       <button
         type="submit"
@@ -138,8 +139,59 @@
       Edit Ticket
     </a>
   </div>
-</div>
 
+  <!-- Add Comment -->
+  <div class="flex items-start space-x-4 px-4 py-5 sm:px-6 bg-gray-50">
+    <div class="flex-shrink-0">
+      <img
+        class="inline-block h-10 w-10 rounded-full"
+        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        alt=""
+      />
+    </div>
+    <div class="min-w-0 flex-1">
+      <!-- Comment FORM -->
+      <form action="#" class="relative">
+        <div
+          class="border border-gray-300 rounded-lg shadow-sm overflow-hidden"
+        >
+          <label for="comment" class="sr-only">Add a comment</label>
+          <textarea
+            rows="3"
+            name="comment"
+            id="comment"
+            class="block w-full py-3 px-3 border-0 resize-none sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            placeholder="Add a comment..."
+          ></textarea>
+
+          <!-- Spacer element to match the height of the toolbar -->
+          <div class="py-2" aria-hidden="true">
+            <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+            <div class="py-px">
+              <div class="h-9"></div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="absolute bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-end"
+        >
+          <div class="flex-shrink-0">
+            <button
+              type="submit"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Post
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End of ticket -->
+
+<!-- Show all tickets -->
 <div>
   <a
     href="/tickets"
