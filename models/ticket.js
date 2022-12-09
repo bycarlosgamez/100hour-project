@@ -10,7 +10,6 @@ const TicketSchema = new Schema({
   description: {
     type: String,
     required: true,
-    trim: true,
   },
   owner: String,
   assigned: String,
@@ -24,20 +23,30 @@ const TicketSchema = new Schema({
   },
   type: {
     type: String,
-    defaul: 'bug',
+    default: 'bug',
     enum: ['bug', 'feature', 'document', 'other'],
   },
   priority: {
     type: String,
-    defaul: 'high',
+    default: 'high',
     enum: ['high', 'medium', 'low'],
   },
   status: {
     type: String,
-    defaul: 'open',
+    default: 'open',
     enum: ['open', 'solved', 'awaiting'],
   },
-  project: String,
+  project: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Ticket', TicketSchema, 'tickets');
