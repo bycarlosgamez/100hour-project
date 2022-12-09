@@ -151,14 +151,18 @@
     </div>
     <div class="min-w-0 flex-1">
       <!-- Comment FORM -->
-      <form action="#" class="relative">
+      <form
+        action="/tickets/<%= ticket._id %>/comments"
+        method="POST"
+        class="relative"
+      >
         <div
           class="border border-gray-300 rounded-lg shadow-sm overflow-hidden"
         >
           <label for="comment" class="sr-only">Add a comment</label>
           <textarea
             rows="3"
-            name="comment"
+            name="comment[body]"
             id="comment"
             class="block w-full py-3 px-3 border-0 resize-none sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             placeholder="Add a comment..."
