@@ -7,6 +7,7 @@ const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
 const connectDB = require('./config/database');
 const Ticket = require('./models/ticket');
+const Comment = require('./models/comment');
 
 // Allows us to hace acces to varialves in our .env file
 require('dotenv').config({ path: './config/.env' });
@@ -87,6 +88,19 @@ app.delete(
     const { id } = req.params;
     await Ticket.findByIdAndRemove(id);
     res.redirect(`/tickets`);
+  })
+);
+
+// add ticket comments
+app.post(
+  '/tickets/:id/comments',
+  catchAsync(async (req, res) => {
+    const ticket = await Ticket.findById(req.params.id);
+    const comment = new Comment(req.body.comment);
+    ticket.comments.push(comment);
+    await comment.save();
+    await ticket.save();
+    res.redirect(`/tickets/${ticket._id}`);
   })
 );
 
