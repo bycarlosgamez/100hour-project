@@ -58,7 +58,7 @@ app.get(
   '/tickets/:id',
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const ticket = await Ticket.findById(id);
+    const ticket = await Ticket.findById(id).populate('comments');
     res.render('tickets/show', { ticket });
   })
 );
