@@ -104,6 +104,17 @@ app.post(
   })
 );
 
+// delete ticket comment
+app.delete(
+  '/tickets/:id/comments/:commentId',
+  catchAsync(async (req, res) => {
+    const { id, commentId } = req.params;
+    await Ticket.findByIdAndUpdate(id, { $pull: { comments: commentId } });
+    await Comment.findByIdAndDelete(commentId);
+    res.redirect(`/tickets/${id}`);
+  })
+);
+
 // show 404
 app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404));
