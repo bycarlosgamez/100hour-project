@@ -86,7 +86,7 @@ app.delete(
   '/tickets/:id',
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    await Ticket.findByIdAndRemove(id);
+    await Ticket.findByIdAndDelete(id);
     res.redirect(`/tickets`);
   })
 );
