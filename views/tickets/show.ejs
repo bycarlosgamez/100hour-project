@@ -166,6 +166,7 @@
             id="comment"
             class="block w-full py-3 px-3 border-0 resize-none sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             placeholder="Add a comment..."
+            required
           ></textarea>
 
           <!-- Spacer element to match the height of the toolbar -->
@@ -192,10 +193,39 @@
       </form>
     </div>
   </div>
+
+  <!-- Comments Section -->
+  <div class="bg-white px-4 py-5 sm:px-6">
+    <% for(let comment of ticket.comments) { %>
+    <div>
+      <h2 class="sr-only">Ticket comments</h2>
+
+      <div class="-my-10">
+        <div class="flex text-sm text-gray-500 space-x-4">
+          <div class="flex-none py-10">
+            <img
+              src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+              alt=""
+              class="w-10 h-10 bg-gray-100 rounded-full"
+            />
+          </div>
+          <div class="flex-1 py-10">
+            <h3 class="font-medium text-gray-900">Emily Selman</h3>
+            <p><time datetime="2021-07-16"><%= comment.createdAt %></time></p>
+
+            <div class="mt-4 prose prose-sm max-w-none text-gray-500">
+              <p><%= comment.body %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
 </div>
 <!-- End of ticket -->
 
-<!-- Show all tickets -->
+<!-- Show all tickets Button-->
 <div>
   <a
     href="/tickets"
