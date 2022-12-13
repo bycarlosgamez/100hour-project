@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const ejsmate = require('ejs-mate');
+const session = require('express-session');
+const flash = require('connect-flash');
+const connectDB = require('./config/database');
 const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
-const session = require('express-session');
-const connectDB = require('./config/database');
 
 // Routers
 const tickets = require('./routes/tickets');
@@ -38,7 +39,15 @@ app.use(express.static('public')); // to use public files
 app.use(express.urlencoded({ extended: true })); // to parse req.body
 app.use(express.json()); // to convert to json
 app.use(methodOverride('_method')); // to use put or delete methods from form
-app.use(session(sessionConfig)); // Session (express-session middleware)
+app.use(session(sessionConfig)); // session (express-session middleware)
+app.use(flash()); // for storing messages and cleared after being displayed to the user
+
+// Flash middleware
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 // Routes
 app.use('/tickets', tickets);
