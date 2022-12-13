@@ -21,9 +21,10 @@ router.get('/new', (req, res) => {
 router.post(
   '/',
   catchAsync(async (req, res) => {
-    if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
+    // if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
     const ticket = new Ticket(req.body.ticket);
     await ticket.save();
+    req.flash('success', 'Succesfully Created a New Ticket');
     res.redirect(`/tickets/${ticket._id}`);
   })
 );
