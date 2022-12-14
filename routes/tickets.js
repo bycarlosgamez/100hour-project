@@ -35,6 +35,10 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findById(id).populate('comments');
+    if (!ticket) {
+      req.flash('error', 'Cannot find ticket');
+      res.redirect('/tickets');
+    }
     res.render('tickets/show', { ticket });
   })
 );
