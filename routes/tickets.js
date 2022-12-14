@@ -24,12 +24,12 @@ router.post(
     // if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
     const ticket = new Ticket(req.body.ticket);
     await ticket.save();
-    req.flash('success', 'Succesfully Created a New Ticket');
+    req.flash('success', 'Successfully created a new ticket');
     res.redirect(`/tickets/${ticket._id}`);
   })
 );
 
-// see individual ticket by id
+// show individual ticket by id
 router.get(
   '/:id',
   catchAsync(async (req, res) => {
@@ -63,6 +63,7 @@ router.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Ticket.findByIdAndDelete(id);
+    req.flash('success', 'Ticket deleted');
     res.redirect(`/tickets`);
   })
 );
