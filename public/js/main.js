@@ -1,8 +1,8 @@
 // Close alert
-const flashBtn = document.querySelector('#flash-btn');
+const flashBtn = document.querySelectorAll('.flash-btn');
 const flash = document.querySelector('.flash-alert');
 
-flashBtn.addEventListener('click', hide);
+flashBtn.forEach((btn) => btn.addEventListener('click', hide));
 
 function hide() {
   flash.classList.add('invisible');
