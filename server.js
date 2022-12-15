@@ -7,10 +7,14 @@ const flash = require('connect-flash');
 const connectDB = require('./config/database');
 const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const PassportLocal = require('passport-local');
+const User = require('./models/user');
 
 // Routers
-const tickets = require('./routes/tickets');
-const comments = require('./routes/comments');
+const usersRoutes = require('./routes/users');
+const ticketsRoutes = require('./routes/tickets');
+const commentsRoutes = require('./routes/comments');
 
 // Session Config
 const sessionConfig = {
@@ -41,6 +45,12 @@ app.use(express.json()); // to convert to json
 app.use(methodOverride('_method')); // to use put or delete methods from form
 app.use(session(sessionConfig)); // session (express-session middleware)
 app.use(flash()); // for storing messages and cleared after being displayed to the user
+app.use(passport.initialize()); // initialize passport for auth
+app.use(passport.session()); // to have persistent login sessions
+
+passport.use(new PassportLocal(User.authenticate));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Flash middleware
 app.use((req, res, next) => {
@@ -50,8 +60,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/tickets', tickets);
-app.use('/tickets/:id/comments', comments);
+app.use('/', usersRoutes);
+app.use('/tickets', ticketsRoutes);
+app.use('/tickets/:id/comments', commentsRoutes);
 
 // homepage
 app.get('/', (req, res) => {
