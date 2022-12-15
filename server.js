@@ -12,8 +12,9 @@ const PassportLocal = require('passport-local');
 const User = require('./models/user');
 
 // Routers
-const tickets = require('./routes/tickets');
-const comments = require('./routes/comments');
+const usersRoutes = require('./routes/users');
+const ticketsRoutes = require('./routes/tickets');
+const commentsRoutes = require('./routes/comments');
 
 // Session Config
 const sessionConfig = {
@@ -59,8 +60,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/tickets', tickets);
-app.use('/tickets/:id/comments', comments);
+app.use('/', usersRoutes);
+app.use('/tickets', ticketsRoutes);
+app.use('/tickets/:id/comments', commentsRoutes);
 
 // homepage
 app.get('/', (req, res) => {
