@@ -3,8 +3,10 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsync');
 const ExpressError = require('../helpers/ExpressError');
 const Ticket = require('../models/ticket');
+const { isLoggedIn } = require('../middleware/auth');
 
-// see all tickets
+// @description     Show all available tickets
+// @route           GET /tickets
 router.get(
   '/',
   catchAsync(async (req, res, next) => {
@@ -13,13 +15,17 @@ router.get(
   })
 );
 
-// create new ticket
-router.get('/new', (req, res) => {
+// @description     Show new ticket page
+// @route           GET /tickets/new
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('tickets/new');
 });
 
+// @description     Process Create ticket form
+// @route           POST /tickets
 router.post(
   '/',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     // if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
     const ticket = new Ticket(req.body.ticket);
@@ -29,7 +35,8 @@ router.post(
   })
 );
 
-// show individual ticket by id
+// @description     Show individual ticket page by id
+// @route           GET /tickets/:id
 router.get(
   '/:id',
   catchAsync(async (req, res) => {
@@ -43,17 +50,22 @@ router.get(
   })
 );
 
-// edit existing ticket
+// @description     Show edit ticket page
+// @route           GET /tickets/:id/edit
 router.get(
   '/:id/edit',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const ticket = await Ticket.findById(req.params.id);
     res.render('tickets/edit', { ticket });
   })
 );
 
+// @description     Process Edit ticket form
+// @route           PUT /tickets/:id/
 router.put(
   '/:id',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findByIdAndUpdate(id, { ...req.body.ticket });
@@ -61,9 +73,11 @@ router.put(
   })
 );
 
-// delete ticket
+// @description     Process Delete ticket form
+// @route           DELETE /tickets/:id/
 router.delete(
   '/:id',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Ticket.findByIdAndDelete(id);
