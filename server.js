@@ -8,7 +8,7 @@ const connectDB = require('./config/database');
 const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
-const PassportLocal = require('passport-local');
+const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
 // Routers
@@ -45,10 +45,10 @@ app.use(express.json()); // to convert to json
 app.use(methodOverride('_method')); // to use put or delete methods from form
 app.use(session(sessionConfig)); // session (express-session middleware)
 app.use(flash()); // for storing messages and cleared after being displayed to the user
-app.use(passport.initialize()); // initialize passport for auth
+app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // to have persistent login sessions
 
-passport.use(new PassportLocal(User.authenticate));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
