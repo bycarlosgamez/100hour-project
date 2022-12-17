@@ -4,12 +4,14 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsync');
 const User = require('../models/user');
 
-// @description     Local Signup
-// @route GET       users/signup
+// @description     Show Signup page
+// @route           GET /signup
 router.get('/signup', (req, res) => {
   res.render('users/signup');
 });
 
+// @description     Process Signup form
+// @route           POST /signup
 router.post(
   '/signup',
   catchAsync(async (req, res) => {
@@ -26,12 +28,14 @@ router.post(
   })
 );
 
-// @description     Local Login
-// @route GET       users/login
+// @description     Show Login page
+// @route           GET /login
 router.get('/login', (req, res) => {
   res.render('users/login');
 });
 
+// @description     Process Login form
+// @route           POST /login
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -48,5 +52,17 @@ router.post(
     }
   })
 );
+
+// @description     Process logout
+// @route           POST /logout
+router.post('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash('success', 'You are now logged out');
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
