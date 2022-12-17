@@ -5,12 +5,13 @@ This project started a a simple ticket trakcer, but its turning into a full stac
 ## How It's Made:
 
 **Tech used:**
-Fronyend: HTML, CSS, JavaScript
-Backend: Node, Express, MongoDB
+
+- Fronyend: HTML, CSS, JavaScript
+- Backend: Node, Express, MongoDB
 
 ## Getting Started
 
-**Tech used:**
+**Instructions**
 
 - Fork and clone the repository to your local computer.
 - Add and store .env file in the config folder
