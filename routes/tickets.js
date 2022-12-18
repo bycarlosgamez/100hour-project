@@ -9,6 +9,7 @@ const { isLoggedIn } = require('../middleware/auth');
 // @route           GET /tickets
 router.get(
   '/',
+  isLoggedIn,
   catchAsync(async (req, res, next) => {
     const tickets = await Ticket.find({});
     res.render('tickets/index', { tickets });
@@ -39,6 +40,7 @@ router.post(
 // @route           GET /tickets/:id
 router.get(
   '/:id',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findById(id).populate('comments');
