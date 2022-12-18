@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "connect-flash": "^0.1.1",
