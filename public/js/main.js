@@ -8,7 +8,7 @@ document.addEventListener('click', toggleMenu);
 flashBtn.forEach((btn) => btn.addEventListener('click', hide));
 
 // FUNCTIONS
-// Toogle user menu
+// Toggle user menu
 function toggleMenu(e) {
   if (
     e.target.parentElement !== userMenuBtn &&
@@ -16,7 +16,7 @@ function toggleMenu(e) {
   ) {
     userMenu.classList.add('hidden');
   } else if (e.target.parentElement === userMenuBtn) {
-    userMenu.classList.remove('hidden');
+    userMenu.classList.toggle('hidden');
   }
 }
 
