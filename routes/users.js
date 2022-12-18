@@ -14,13 +14,18 @@ router.get('/signup', (req, res) => {
 // @route           POST /signup
 router.post(
   '/signup',
-  catchAsync(async (req, res) => {
+  catchAsync(async (req, res, next) => {
     try {
       const { username, email, password } = req.body;
       const user = new User({ email, username });
       const registeredUser = await User.register(user, password);
-      req.flash('success', 'Welcome to BugTracker');
-      res.redirect(`/tickets`); //change to redirect to dashboard
+      req.login(registeredUser, (err) => {
+        if (err) {
+          return next(err);
+        }
+        req.flash('success', 'Welcome to BugBust');
+        res.redirect('/tickets'); //change to dashbboard
+      });
     } catch (err) {
       req.flash('error', err.message);
       res.redirect('/signup');
