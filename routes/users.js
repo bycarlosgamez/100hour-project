@@ -47,18 +47,15 @@ router.post(
     failureFlash: true,
     failureRedirect: '/login',
   }),
-  catchAsync(async (req, res) => {
-    try {
-      req.flash('success', 'Welcome back');
-      res.redirect('/tickets');
-    } catch (err) {
-      req.flash('error', err.message);
-      res.redirect('/login');
-    }
-  })
+  (req, res) => {
+    req.flash('success', 'Welcome back');
+    const redirectUrl = req.session.returnTo || '/tickets';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
+  }
 );
 
-// @description     Process logout
+// @description     Process logout form
 // @route           POST /logout
 router.post('/logout', (req, res) => {
   req.logout((err) => {
