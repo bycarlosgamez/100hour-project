@@ -12,7 +12,11 @@ const TicketSchema = new Schema({
     type: String,
     required: true,
   },
-  owner: String,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   assigned: String,
   created: {
     type: Date,
