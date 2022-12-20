@@ -12,6 +12,7 @@ router.get(
   isLoggedIn,
   catchAsync(async (req, res, next) => {
     const tickets = await Ticket.find({});
+    console.log(tickets);
     res.render('tickets/index', { tickets });
   })
 );
@@ -28,8 +29,8 @@ router.post(
   '/',
   isLoggedIn,
   catchAsync(async (req, res) => {
-    // if (!req.body.ticket) throw new ExpressError('Ivalid Ticket Data', 400);
     const ticket = new Ticket(req.body.ticket);
+    ticket.owner = req.user._id;
     await ticket.save();
     req.flash('success', 'Successfully created a new ticket');
     res.redirect(`/tickets/${ticket._id}`);
@@ -43,7 +44,9 @@ router.get(
   isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const ticket = await Ticket.findById(id).populate('comments');
+    const ticket = await Ticket.findById(id)
+      .populate('comments')
+      .populate('owner');
     if (!ticket) {
       req.flash('error', 'Cannot find ticket');
       res.redirect('/tickets');
