@@ -1,5 +1,17 @@
 <% layout('layouts/boilerplate') %>
 
+<!-- Show all tickets Button-->
+<div>
+  <a
+    href="/tickets"
+    class="inline-block rounded-lg bg-indigo-600 px-4 mb-8 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
+  >
+    <span class="text-indigo-200" aria-hidden="true">&larr;</span>
+    See All Tickets
+  </a>
+</div>
+
+<!-- Ticket-->
 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
   <div class="px-4 py-5 sm:px-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -123,6 +135,7 @@
   </div>
 
   <!-- Ticket actions -->
+  <% if( currentUser && ticket.owner.equals(currentUser._id)) { %>
   <div class="bg-white px-4 py-3 mb-4 text-right sm:px-6 flex justify-end">
     <form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
       <button
@@ -139,6 +152,7 @@
       Edit Ticket
     </a>
   </div>
+  <% } %>
 
   <!-- Add Comment -->
   <div class="flex items-start space-x-4 px-4 py-10 sm:px-6 bg-gray-50">
@@ -239,14 +253,3 @@
   </div>
 </div>
 <!-- End of ticket -->
-
-<!-- Show all tickets Button-->
-<div>
-  <a
-    href="/tickets"
-    class="inline-block rounded-lg bg-indigo-600 px-4 mt-8 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
-  >
-    <span class="text-indigo-200" aria-hidden="true">&larr;</span>
-    See All Tickets
-  </a>
-</div>
