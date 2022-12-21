@@ -3,7 +3,7 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsync');
 const ExpressError = require('../helpers/ExpressError');
 const Ticket = require('../models/ticket');
-const { isLoggedIn } = require('../middleware/auth');
+const { isLoggedIn, isOwner } = require('../middleware/auth');
 
 // @description     Show all available tickets
 // @route           GET /tickets
@@ -60,8 +60,15 @@ router.get(
 router.get(
   '/:id/edit',
   isLoggedIn,
+  isOwner,
   catchAsync(async (req, res) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const { id } = req.params;
+    const ticket = await Ticket.findById(id);
+    if (!ticket) {
+      req.flash('error', 'Cannot find ticket');
+      res.redirect('/tickets');
+    }
+
     res.render('tickets/edit', { ticket });
   })
 );
@@ -71,6 +78,7 @@ router.get(
 router.put(
   '/:id',
   isLoggedIn,
+  isOwner,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findByIdAndUpdate(id, { ...req.body.ticket });
@@ -83,6 +91,7 @@ router.put(
 router.delete(
   '/:id',
   isLoggedIn,
+  isOwner,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Ticket.findByIdAndDelete(id);
