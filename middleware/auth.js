@@ -18,4 +18,13 @@ module.exports = {
     }
     next();
   },
+  isCommentAuthor: async function (req, res, next) {
+    const { id, commentId } = req.params;
+    const comment = await Comment.findById(commentId);
+    if (!comment.author.equals(req.user._id)) {
+      req.flash('error', 'You do not have permission to perform this action');
+      res.redirect(`/tickets/${id}`);
+    }
+    next();
+  },
 };
