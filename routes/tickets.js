@@ -11,8 +11,7 @@ router.get(
   '/',
   isLoggedIn,
   catchAsync(async (req, res, next) => {
-    const tickets = await Ticket.find({});
-    console.log(tickets);
+    const tickets = await Ticket.find({}).populate('owner');
     res.render('tickets/index', { tickets });
   })
 );
@@ -45,8 +44,12 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findById(id)
-      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: { path: 'author' },
+      })
       .populate('owner');
+    console.log(ticket);
     if (!ticket) {
       req.flash('error', 'Cannot find ticket');
       res.redirect('/tickets');
