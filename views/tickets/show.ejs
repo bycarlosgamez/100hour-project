@@ -224,7 +224,9 @@
             />
           </div>
           <div class="flex-1 py-10">
-            <h3 class="font-medium text-gray-900">Hector Gibbons</h3>
+            <h3 class="font-medium text-gray-900">
+              <%= comment.author.username %>
+            </h3>
             <p><time datetime=""><%= comment.createdAt %></time></p>
 
             <div class="mt-4 mb-2 prose prose-sm max-w-none text-gray-500">
@@ -232,6 +234,7 @@
             </div>
 
             <!-- Delete Comment -->
+            <% if( currentUser && comment.author.equals(currentUser._id)) { %>
             <div class="flex justify-end border-b border-gray-200 pb-10">
               <form
                 action="/tickets/<%= ticket._id %>/comments/<%= comment._id %>?_method=DELETE"
@@ -245,6 +248,7 @@
                 </button>
               </form>
             </div>
+            <% } %>
           </div>
         </div>
       </div>
