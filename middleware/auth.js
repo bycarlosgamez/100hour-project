@@ -1,4 +1,5 @@
 const Ticket = require('../models/ticket');
+const Comment = require('../models/comment');
 
 module.exports = {
   isLoggedIn: function (req, res, next) {
