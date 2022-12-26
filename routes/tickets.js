@@ -3,6 +3,8 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsync');
 const { isLoggedIn, isOwner } = require('../middleware/auth');
 const ticketsController = require('../controllers/tickets');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 // @description     Show all available tickets
 // @route           GET /tickets
