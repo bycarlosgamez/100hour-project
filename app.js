@@ -1,3 +1,8 @@
+// Allows us to hace acces to varialves in our .env file in developer mode
+if (process.env.NODE_ENV !== 'producion') {
+  require('dotenv').config({ path: './config/.env' });
+}
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -28,9 +33,6 @@ const sessionConfig = {
   },
 };
 
-// Allows us to hace acces to varialves in our .env file
-require('dotenv').config({ path: './config/.env' });
-
 // Connects our DB to server
 connectDB();
 
@@ -52,7 +54,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Locals
+// middleware
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
