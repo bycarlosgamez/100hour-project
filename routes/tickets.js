@@ -4,20 +4,25 @@ const catchAsync = require('../helpers/catchAsync');
 const { isLoggedIn, isOwner } = require('../middleware/auth');
 const ticketsController = require('../controllers/tickets');
 const multer = require('multer');
-const { storage, cloudinary } = require('../middleware/cloudinary');
+const { storage } = require('../middleware/cloudinary');
 const upload = multer({ storage });
 
 // @description     Show all available tickets
 // @route           GET /tickets
 router.get('/', isLoggedIn, catchAsync(ticketsController.getTickets));
 
+// @description     Process Create ticket form
+// @route           POST /tickets
+router.post(
+  '/',
+  isLoggedIn,
+  upload.array('attachement'),
+  catchAsync(ticketsController.createTicket)
+);
+
 // @description     Show new ticket page
 // @route           GET /tickets/new
 router.get('/new', isLoggedIn, ticketsController.createTicketForm);
-
-// @description     Process Create ticket form
-// @route           POST /tickets
-router.post('/', isLoggedIn, catchAsync(ticketsController.createTicket));
 
 // @description     Show individual ticket page by id
 // @route           GET /tickets/:id
