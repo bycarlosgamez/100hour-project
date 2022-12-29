@@ -10,8 +10,13 @@ module.exports = {
   },
   createTicket: async (req, res) => {
     const ticket = new Ticket(req.body.ticket);
+    ticket.attachements = req.files.map((attachement) => ({
+      url: attachement.path,
+      filename: attachement.filename,
+    }));
     ticket.owner = req.user._id;
     await ticket.save();
+    console.log(ticket);
     req.flash('success', 'Successfully created a new ticket');
     res.redirect(`/tickets/${ticket._id}`);
   },
