@@ -11,11 +11,8 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'BugBust',
-    allowedFormats: ['jpeg', 'jpg', 'png'],
+    allowedFormats: ['jpeg', 'png', 'jpg'],
   },
 });
 
-module.exports = {
-  cloudinary,
-  storage,
-};
+module.exports = { cloudinary, storage };
