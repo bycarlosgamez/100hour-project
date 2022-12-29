@@ -52,6 +52,12 @@ const TicketSchema = new Schema({
       ref: 'Comment',
     },
   ],
+  attachements: [
+    {
+      url: String,
+      filename: String,
+    },
+  ],
 });
 
 TicketSchema.post('findOneAndDelete', async function (doc) {
