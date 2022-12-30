@@ -43,6 +43,7 @@ router.put(
   '/:id',
   isLoggedIn,
   isOwner,
+  upload.array('attachement'),
   catchAsync(ticketsController.editTicket)
 );
 
