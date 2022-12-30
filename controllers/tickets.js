@@ -16,7 +16,6 @@ module.exports = {
     }));
     ticket.owner = req.user._id;
     await ticket.save();
-    console.log(ticket);
     req.flash('success', 'Successfully created a new ticket');
     res.redirect(`/tickets/${ticket._id}`);
   },
@@ -28,7 +27,6 @@ module.exports = {
         populate: { path: 'author' },
       })
       .populate('owner');
-    console.log(ticket);
     if (!ticket) {
       req.flash('error', 'Cannot find ticket');
       res.redirect('/tickets');
@@ -48,6 +46,12 @@ module.exports = {
   editTicket: async (req, res) => {
     const { id } = req.params;
     const ticket = await Ticket.findByIdAndUpdate(id, { ...req.body.ticket });
+    const attchs = req.files.map((attachement) => ({
+      url: attachement.path,
+      filename: attachement.filename,
+    }));
+    ticket.attachements.push(...attchs);
+    await ticket.save();
     res.redirect(`/tickets/${ticket._id}`);
   },
   deleteTicket: async (req, res) => {
