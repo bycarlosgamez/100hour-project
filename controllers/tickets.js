@@ -1,4 +1,5 @@
 const Ticket = require('../models/ticket');
+const { cloudinary } = require('../middleware/cloudinary');
 
 module.exports = {
   getTickets: async (req, res, next) => {
@@ -52,6 +53,16 @@ module.exports = {
     }));
     ticket.attachements.push(...attchs);
     await ticket.save();
+    if (req.body.deleteAttachement) {
+      for (let filename of req.body.deleteAttachement) {
+        await cloudinary.uploader.destroy(filename);
+      }
+      await ticket.updateOne({
+        $pull: {
+          attachements: { filename: { $in: req.body.deleteAttachement } },
+        },
+      });
+    }
     res.redirect(`/tickets/${ticket._id}`);
   },
   deleteTicket: async (req, res) => {
