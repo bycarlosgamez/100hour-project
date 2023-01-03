@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const Comment = require('./comment');
 const Schema = mongoose.Schema;
 
+const attachementsSchemma = new Schema({
+  url: String,
+  filename: String,
+});
+
+attachementsSchemma.virtual('thumbnail').get(function () {
+  return this.url.replace('/upload', '/upload/w_200');
+});
+
 const TicketSchema = new Schema({
   title: {
     type: String,
@@ -52,12 +61,7 @@ const TicketSchema = new Schema({
       ref: 'Comment',
     },
   ],
-  attachements: [
-    {
-      url: String,
-      filename: String,
-    },
-  ],
+  attachements: [attachementsSchemma],
 });
 
 TicketSchema.post('findOneAndDelete', async function (doc) {
