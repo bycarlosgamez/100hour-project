@@ -1,6 +1,6 @@
 # BugBust
 
-![Alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/carlosgamez/Documents/100devs/100hour-project/public/assets/bugbust.gif?version%3D1673031885092)
+![Alt text](https://github.com/bycarlosgamez/100hour-project/tree/main/public/assets/bugbust.gif)
 
 BugBust is a bug tracker is a software application that is used to manage and track bugs or defects in software development projects. It is an essential tool for developers to identify, prioritize, and fix issues in their code.
 
