@@ -1,6 +1,6 @@
 # BugBust
 
-![Alt text](https://github.com/bycarlosgamez/100hour-project/tree/main/public/assets/bugbust.gif)
+![Alt text](https://github.com/bycarlosgamez/assets/blob/946bb863891920c7ed09802a255c56f0e572fdf4/bugbust/bugbust.gif)
 
 BugBust is a bug tracker is a software application that is used to manage and track bugs or defects in software development projects. It is an essential tool for developers to identify, prioritize, and fix issues in their code.
 
