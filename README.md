@@ -1,6 +1,8 @@
-# My Awesome Project
+# BugBust
 
-![Alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/carlosgamez/Downloads/bugbust.gif?version%3D1673028876683)
+![Alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/carlosgamez/Documents/100devs/100hour-project/public/assets/bugbust.gif?version%3D1673031885092)
+
+BugBust is a bug tracker is a software application that is used to manage and track bugs or defects in software development projects. It is an essential tool for developers to identify, prioritize, and fix issues in their code.
 
 This is an ongoing project, this first part is an MVP with all basic functionality and authentication, where users can create an account, login, create a ticket, edith a ticket, delete a ticket, make comments to tickets, this MVP uses MVC architectural pattern.
 
