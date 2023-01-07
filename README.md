@@ -1,8 +1,8 @@
 # BugBust
 
-![Alt text](https://github.com/bycarlosgamez/assets/blob/946bb863891920c7ed09802a255c56f0e572fdf4/bugbust/bugbust.gif)
+![Alt text](https://github.com/bycarlosgamez/assets/blob/main/bugbust/bugbust.gif)
 
-BugBust is a bug tracker is a software application that is used to manage and track bugs or defects in software development projects. It is an essential tool for developers to identify, prioritize, and fix issues in their code.
+BugBust is a software application that is used to manage and track bugs or defects in software development projects. It is an essential tool for developers to identify, prioritize, and fix issues in their code.
 
 This is an ongoing project, this first part is an MVP with all basic functionality and authentication, where users can create an account, login, create a ticket, edith a ticket, delete a ticket, make comments to tickets, this MVP uses MVC architectural pattern.
 
